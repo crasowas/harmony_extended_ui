@@ -1,0 +1,19 @@
+{
+  "name": "extended_ui",
+  "version": "1.0.0",
+  "description": "一套基于ArkUI的组件扩展库",
+  "main": "Index.ets",
+  "author": "crasowas",
+  "homepage": "https://github.com/crasowas",
+  "repository": "https://github.com/crasowas/harmony_extended_ui",
+  "license": "MIT",
+  "dependencies": {},
+  "keywords": [
+    "Container",
+    "SizedBox",
+  ],
+  "tags": [
+    "Container",
+    "SizedBox",
+  ]
+}
