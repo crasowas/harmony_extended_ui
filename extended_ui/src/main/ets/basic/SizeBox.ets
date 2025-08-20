@@ -14,15 +14,15 @@ export struct SizedBox {
   /**
    * 宽度（可选），默认撑满父组件
    */
-  @Param w: Length = '100%'
+  @Param wid: Length = '100%'
   /**
    * 高度（可选），默认撑满父组件
    */
-  @Param h: Length = '100%'
+  @Param hei: Length = '100%'
 
   build() {
     Container()
-      .width(this.w)
-      .height(this.h)
+      .width(this.wid)
+      .height(this.hei)
   }
 }

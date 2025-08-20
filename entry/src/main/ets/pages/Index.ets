@@ -6,7 +6,7 @@ struct Index {
   build() {
     Column() {
       this.buildContainer()
-      SizedBox({ h: 10 })
+      SizedBox({ hei: 10 })
       this.buildSizedBox()
     }
     .alignItems(HorizontalAlign.Start)
@@ -49,9 +49,7 @@ struct Index {
   @Builder
   buildSizedBox() {
     Stack() {
-      SizedBox({
-        h: 100
-      })
+      SizedBox({ hei: 100 })
         .backgroundColor(Color.Gray)
       Text('SizedBox')
         .fontColor(Color.White)
