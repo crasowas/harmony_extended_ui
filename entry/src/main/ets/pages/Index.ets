@@ -1,13 +1,22 @@
-import { Container, SizedBox } from 'extended_ui'
+import { Container, SizedBox, LayoutBuilder, BoxConstraints } from 'extended_ui'
 
 @Entry
-@Component
+@ComponentV2
 struct Index {
+  private layoutBuilderMinWidth: number = 150
+  private layoutBuilderMaxWidth: number = 300
+  private layoutBuilderMinHeight: number = 150
+  private layoutBuilderMaxHeight: number = 200
+  @Local layoutBuilderWidth: number = 150
+  @Local layoutBuilderHeight: number = 150
+
   build() {
     Column() {
       this.buildContainer()
       SizedBox({ hei: 10 })
       this.buildSizedBox()
+      SizedBox({ hei: 10 })
+      this.buildLayoutBuilder()
     }
     .alignItems(HorizontalAlign.Start)
     .width('100%')
@@ -55,5 +64,79 @@ struct Index {
         .fontColor(Color.White)
     }
     .alignContent(Alignment.TopStart)
+  }
+
+  @Builder
+  buildLayoutBuilder() {
+    Stack() {
+      LayoutBuilder({
+        childLayout: (constraints) => {
+          this.buildLayoutBuilderChild(constraints)
+        }
+      })
+        .constraintSize({
+          minWidth: 0,
+          maxWidth: this.layoutBuilderWidth,
+          minHeight: 0,
+          maxHeight: this.layoutBuilderHeight
+        })
+        .backgroundColor(Color.Orange)
+      Text('LayoutBuilder')
+        .fontColor(Color.White)
+    }
+    .alignContent(Alignment.TopStart)
+
+    Row() {
+      Text('layoutBuilderWidth: ')
+      Slider({
+        value: this.layoutBuilderWidth,
+        style: SliderStyle.OutSet,
+        direction: Axis.Horizontal,
+        min: this.layoutBuilderMinWidth,
+        max: this.layoutBuilderMaxWidth
+      })
+        .blockColor('#ff7171d7')
+        .trackColor('#ff9fbcc3')
+        .selectedColor('#ff5062a5')
+        .showTips(true)
+        .layoutWeight(1)
+        .onChange((value: number, _mode: SliderChangeMode) => {
+          this.layoutBuilderWidth = value
+        })
+    }
+
+    Row() {
+      Text('layoutBuilderHeight: ')
+      Slider({
+        value: this.layoutBuilderHeight,
+        style: SliderStyle.OutSet,
+        direction: Axis.Horizontal,
+        min: this.layoutBuilderMinHeight,
+        max: this.layoutBuilderMaxHeight
+      })
+        .blockColor('#ff7171d7')
+        .trackColor('#ff9fbcc3')
+        .selectedColor('#ff5062a5')
+        .showTips(true)
+        .layoutWeight(1)
+        .onChange((value: number, _mode: SliderChangeMode) => {
+          this.layoutBuilderHeight = value
+        })
+    }
+  }
+
+  @Builder
+  buildLayoutBuilderChild(constraints: BoxConstraints) {
+    Row() {
+      Text(`minWidth: ${constraints.minWidth} maxWidth: ${constraints.maxWidth}\n minHeight: ${constraints.minHeight} maxHeight: ${constraints.maxHeight}`)
+        .fontSize(14)
+        .fontColor(Color.White)
+        .textAlign(TextAlign.Center)
+        .padding(10)
+        .backgroundColor(Color.Red)
+    }
+    .width('100%')
+    .height('100%')
+    .justifyContent(FlexAlign.Center)
   }
 }
